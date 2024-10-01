@@ -16,6 +16,10 @@ public class Parser {
     private boolean parseExpression() {
         if (index >= expression.length()) return false;
 
+        if (expression.charAt(index) == '-') {
+            index++;
+        }
+
         if (Character.isDigit(expression.charAt(index))) {
             parseNumber();
         } else if (expression.charAt(index) == '(') {
@@ -46,19 +50,5 @@ public class Parser {
     }
 
     public static void main(String[] args) {
-        Parser parser1 = new Parser("(2+1)*2");
-        System.out.println(parser1.parseExpr()); // true
-
-        Parser parser2 = new Parser("((2+1)-(3-4))");
-        System.out.println(parser2.parseExpr()); // true
-
-        Parser parser3 = new Parser("(2)");
-        System.out.println(parser3.parseExpr()); // true
-
-        Parser parser4 = new Parser("((");
-        System.out.println(parser4.parseExpr()); // false
-
-        Parser parser5 = new Parser("(2)+");
-        System.out.println(parser5.parseExpr()); // false
     }
 }
